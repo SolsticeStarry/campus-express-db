@@ -1,0 +1,4 @@
+SELECT *
+FROM view_pending_pickup
+WHERE 驿站 = (SELECT station_name FROM station WHERE station_id = 1)
+ORDER BY 到站时间;

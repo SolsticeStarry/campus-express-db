@@ -1,0 +1,8 @@
+SELECT
+    驿站,
+    快递柜,
+    柜格口,
+    状态
+FROM view_locker_slot_status
+WHERE 状态 = '故障'
+ORDER BY 驿站, 快递柜, 柜格口;

@@ -1,0 +1,6 @@
+SELECT
+    快递公司,
+    COUNT(*) AS 到件量
+FROM view_parcel_detail
+GROUP BY 快递公司
+ORDER BY 到件量 DESC, 快递公司;

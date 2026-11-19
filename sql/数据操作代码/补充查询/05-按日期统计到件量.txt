@@ -1,0 +1,6 @@
+SELECT
+    DATE(到站时间) AS 日期,
+    COUNT(*) AS 到件量
+FROM view_parcel_detail
+GROUP BY DATE(到站时间)
+ORDER BY 日期;

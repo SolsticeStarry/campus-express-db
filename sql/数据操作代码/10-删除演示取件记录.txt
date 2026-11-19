@@ -1,0 +1,4 @@
+SET @log = (SELECT log_id FROM pickup_log ORDER BY log_id DESC LIMIT 1);
+DELETE FROM pickup_log WHERE log_id = @log;
+
+SELECT COUNT(*) AS 剩余取件记录数 FROM pickup_log;

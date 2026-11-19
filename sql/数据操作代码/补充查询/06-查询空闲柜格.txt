@@ -1,0 +1,8 @@
+SELECT
+    驿站,
+    快递柜,
+    柜格口
+FROM view_locker_slot_status
+WHERE 状态 = '空闲'
+ORDER BY 驿站, 快递柜, 柜格口
+LIMIT 20;

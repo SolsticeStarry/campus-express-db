@@ -1,0 +1,8 @@
+SELECT
+    DATE_FORMAT(取件时间, '%Y-%m') AS 月份,
+    COUNT(*) AS 取件量,
+    SUM(CASE WHEN 取件方式 = '本人' THEN 1 ELSE 0 END) AS 本人取件量,
+    SUM(CASE WHEN 取件方式 = '代取' THEN 1 ELSE 0 END) AS 代取量
+FROM view_pickup_log_detail
+GROUP BY DATE_FORMAT(取件时间, '%Y-%m')
+ORDER BY 月份;

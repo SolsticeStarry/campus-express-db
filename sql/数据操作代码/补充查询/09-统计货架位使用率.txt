@@ -1,0 +1,11 @@
+SELECT
+    st.station_name AS 驿站,
+    sh.shelf_code AS 货架位,
+    sh.current_count AS 当前数量,
+    sh.capacity AS 容量,
+    ROUND(sh.current_count / sh.capacity * 100, 2) AS 使用率百分比,
+    sh.status AS 状态
+FROM shelf sh
+JOIN station st ON sh.station_id = st.station_id
+ORDER BY 使用率百分比 DESC, 驿站, 货架位
+LIMIT 30;

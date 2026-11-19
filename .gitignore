@@ -1,0 +1,33 @@
+# 本地报告、模板、教材、索引及预览图
+*.docx
+*.doc
+*.dotx
+*.pdf
+/文档索引.md
+/测试截图/
+/assets/*
+!/assets/er_complete_colored.png
+
+# 本地工具可能含绝对路径、账号或脱敏前的原文
+/tools/
+
+# 数据库连接、凭据与本地副本
+/数据库连接信息*
+.env
+.env.*
+!.env.example
+.my.cnf
+.mylogin.cnf
+*.ncx
+*.pem
+*.key
+*.sql.gz
+*.dump
+*.bak
+*.backup
+*.tmp
+*.pending
+
+# Python 缓存
+__pycache__/
+*.pyc

@@ -1,0 +1,22 @@
+SET @p2 = (SELECT parcel_no FROM parcel
+           WHERE status = '已通知' AND shelf_id IS NOT NULL
+           ORDER BY parcel_no LIMIT 1);
+SET @s2 = (SELECT person_id FROM parcel WHERE parcel_no = @p2);
+SET @st2 = (SELECT station_id FROM parcel WHERE parcel_no = @p2);
+
+INSERT INTO pickup_log (
+    parcel_no, person_id, pickup_type, picker_name, picker_phone,
+    pickup_time, station_id
+)
+VALUES (
+    @p2, @s2, '代取', '代取人李四', '00000000000', NOW(), @st2
+);
+
+SELECT p.parcel_no AS 运单号,
+       p.status AS 运单状态,
+       pl.person_id AS 收件人员编号,
+       pl.pickup_type AS 取件方式,
+       pl.picker_name AS 取件人
+FROM parcel p
+JOIN pickup_log pl ON pl.parcel_no = p.parcel_no
+WHERE p.parcel_no = @p2;

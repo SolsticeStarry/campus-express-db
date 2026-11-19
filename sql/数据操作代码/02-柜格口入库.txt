@@ -1,0 +1,16 @@
+INSERT INTO parcel (
+    parcel_no, company_id, person_id, station_id, courier_id,
+    shelf_id, slot_id,
+    category, weight_kg,
+    special_req, arrive_time, notify_time, deadline, status, pickup_code
+)
+VALUES (
+    'DEMO-SLOT-0001', 2, '2023000002', 1, 1,
+    NULL, 2,
+    '电子产品', 0.80,
+    '易碎品，请轻拿轻放', NOW(), NULL, DATE_ADD(NOW(), INTERVAL 3 DAY), '在库', '654321'
+);
+
+SELECT *
+FROM view_locker_slot_status
+WHERE 当前运单 = 'DEMO-SLOT-0001';

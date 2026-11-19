@@ -1,0 +1,23 @@
+SET @p = (SELECT parcel_no FROM parcel
+          WHERE status = '已通知' AND slot_id IS NOT NULL
+          ORDER BY parcel_no LIMIT 1);
+SET @s = (SELECT person_id FROM parcel WHERE parcel_no = @p);
+SET @st = (SELECT station_id FROM parcel WHERE parcel_no = @p);
+SET @n = (SELECT name FROM person WHERE person_id = @s);
+SET @ph = (SELECT phone FROM person WHERE person_id = @s);
+
+INSERT INTO pickup_log (
+    parcel_no, person_id, pickup_type, picker_name, picker_phone,
+    pickup_time, station_id
+)
+VALUES (
+    @p, @s, '本人', @n, @ph, NOW(), @st
+);
+
+SELECT p.parcel_no AS 运单号,
+       p.status AS 运单状态,
+       sl.slot_code AS 柜格口,
+       sl.status AS 柜格状态
+FROM parcel p
+JOIN locker_slot sl ON sl.slot_id = p.slot_id
+WHERE p.parcel_no = @p;

@@ -1,0 +1,9 @@
+SELECT p.*,
+       pl.取件方式,
+       pl.取件人,
+       pl.取件人电话,
+       pl.取件时间,
+       pl.驿站 AS 取件驿站
+FROM view_parcel_detail p
+LEFT JOIN view_pickup_log_detail pl ON pl.运单号 = p.运单号
+WHERE p.运单号 = 'ZT000000000001';

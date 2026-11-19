@@ -1,0 +1,24 @@
+INSERT INTO parcel (
+    parcel_no, company_id, person_id, station_id, courier_id,
+    shelf_id, slot_id,
+    category, weight_kg,
+    special_req, arrive_time, notify_time, deadline, status, pickup_code
+)
+VALUES (
+    'DEMO-SHELF-0001', 1, '2023000001', 11, 11,
+    11, NULL,
+    '日用品', 1.20,
+    NULL, NOW(), NULL, DATE_ADD(NOW(), INTERVAL 3 DAY), '在库', '123456'
+);
+
+SELECT
+    p.parcel_no AS 运单号,
+    st.station_name AS 驿站,
+    sh.shelf_code AS 货架位,
+    sh.current_count AS 当前数量,
+    sh.capacity AS 容量,
+    sh.status AS 状态
+FROM parcel p
+JOIN shelf sh ON sh.shelf_id = p.shelf_id
+JOIN station st ON sh.station_id = st.station_id
+WHERE p.parcel_no = 'DEMO-SHELF-0001';

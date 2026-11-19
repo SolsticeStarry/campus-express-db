@@ -1,0 +1,12 @@
+SELECT
+    运单号,
+    收件人,
+    驿站,
+    到站时间,
+    取件期限,
+    TIMESTAMPDIFF(DAY, 取件期限, NOW()) AS 逾期天数,
+    状态
+FROM view_parcel_detail
+WHERE 状态 = '滞留'
+  AND 取件期限 < NOW() - INTERVAL 3 DAY
+ORDER BY 逾期天数 DESC, 运单号;

@@ -1,0 +1,4 @@
+SELECT *
+FROM view_pickup_log_detail
+WHERE 取件方式 = '代取'
+ORDER BY 取件时间 DESC;

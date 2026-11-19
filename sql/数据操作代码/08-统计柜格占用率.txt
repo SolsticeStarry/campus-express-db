@@ -1,0 +1,11 @@
+SELECT
+    驿站,
+    快递柜,
+    COUNT(*) AS 柜格总数,
+    SUM(CASE WHEN 状态 = '占用' THEN 1 ELSE 0 END) AS 占用数,
+    SUM(CASE WHEN 状态 = '空闲' THEN 1 ELSE 0 END) AS 空闲数,
+    SUM(CASE WHEN 状态 = '故障' THEN 1 ELSE 0 END) AS 故障数,
+    ROUND(SUM(CASE WHEN 状态 = '占用' THEN 1 ELSE 0 END) / COUNT(*) * 100, 2) AS 占用率百分比
+FROM view_locker_slot_status
+GROUP BY 驿站, 快递柜
+ORDER BY 占用率百分比 DESC, 驿站, 快递柜;
